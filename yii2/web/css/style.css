@@ -41,6 +41,10 @@
     text-transform: uppercase;
 }
 
+.links > a:hover {
+    text-decoration: none;
+}
+
 .m-b-md {
     font-family: 'Raleway', sans-serif;
     margin-bottom: 30px;
