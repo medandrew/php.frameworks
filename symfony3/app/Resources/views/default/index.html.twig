@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="flex-center position-ref full-height">
+        <div class="content">
+            <div class="welcome">Добро пожаловать на новый курс "Современные PHP-фреймворки"</div>
+            <div class="title m-b-md">
+                Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}
+            </div>
+
+            <div class="links">
+                <a href="http://profit.frameworks.laravel5/">Проект на Laravel5</a>
+                <a href="http://profit.frameworks.symfony3/">Проект на Symfony3</a>
+                <a href="http://profit.frameworks.yii2/">Проект на Yii2</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+
+</style>
+{% endblock %}
