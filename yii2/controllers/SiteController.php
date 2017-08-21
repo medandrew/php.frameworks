@@ -15,6 +15,20 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
+    public function beforeAction($action)
+    {
+        if ( isset($_SERVER['X-USERNAME']) && ($_SERVER['X-USERNAME'] === 'admin') ) {
+            if ( isset($_SERVER['X-PASSWORD']) && ($_SERVER['X-PASSWORD'] === '123456') ) {
+                return true;
+            }
+        }
+        header('HTTP/l.1 401 Unauthorized');
+        die();
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
