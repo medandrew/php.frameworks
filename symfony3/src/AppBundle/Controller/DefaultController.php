@@ -15,7 +15,7 @@ class DefaultController extends Controller
     {
         // replace this example code with whatever you need
         if ( isset($_SERVER['X-USERNAME']) && ($_SERVER['X-USERNAME'] === 'admin') ) {
-            if ( isset($_SERVER['X-PASSWORD']) && ($_SERVER['X-PASSWORD'] === '123456') ) {
+            if ( isset($_SERVER['X-PASSWORD']) && ($_SERVER['X-PASSWORD'] === hash_hmac('ripemd160', '123456', 'strawberry')) ) {
                 return $this->render('default/index.html.twig', [
                     'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
                 ]);

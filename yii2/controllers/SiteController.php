@@ -18,7 +18,7 @@ class SiteController extends Controller
     public function beforeAction($action)
     {
         if ( isset($_SERVER['X-USERNAME']) && ($_SERVER['X-USERNAME'] === 'admin') ) {
-            if ( isset($_SERVER['X-PASSWORD']) && ($_SERVER['X-PASSWORD'] === '123456') ) {
+            if ( isset($_SERVER['X-PASSWORD']) && ($_SERVER['X-PASSWORD'] === hash_hmac('ripemd160', '123456', 'strawberry')) ) {
                 return true;
             }
         }
