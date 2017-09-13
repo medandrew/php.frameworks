@@ -12,18 +12,24 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+    public $news = [];
+
     /**
      * @inheritdoc
      */
     public function beforeAction($action)
     {
-        if ( isset($_SERVER['X-USERNAME']) && ($_SERVER['X-USERNAME'] === 'admin') ) {
-            if ( isset($_SERVER['X-PASSWORD']) && ($_SERVER['X-PASSWORD'] === hash_hmac('ripemd160', '123456', 'strawberry')) ) {
-                return true;
-            }
+        $file = file(__DIR__ . '/../models/news.php', FILE_IGNORE_NEW_LINES);
+        foreach ($file as $record) {
+            $this->news[] = explode('|', $record);
         }
-        header('HTTP/l.1 401 Unauthorized');
-        die();
+        //if (isset($_SERVER['X-USERNAME']) && ($_SERVER['X-USERNAME'] === 'admin')) {
+        //    if (isset($_SERVER['X-PASSWORD']) && ($_SERVER['X-PASSWORD'] === hash_hmac('ripemd160', '123456', 'strawberry'))) {
+                return true;
+        //    }
+        //}
+        //header('HTTP/l.1 401 Unauthorized');
+        //die();
     }
 
     /**
@@ -69,72 +75,27 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * Displays news.
      *
      * @return string
      */
     public function actionIndex()
     {
-        return $this->render('index');
-    }
-
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-        return $this->render('login', [
-            'model' => $model,
+        return $this->render('news', [
+            'news' => $this->news
         ]);
     }
 
     /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
+     * Displays article.
      *
      * @return string
      */
-    public function actionAbout()
+    public function actionShow($id)
     {
-        return $this->render('about');
+        return $this->render('article', [
+            'news' => $this->news,
+            'article' => $this->news[--$id]
+        ]);
     }
 }

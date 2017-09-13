@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="container">
+        <h4>Новости</h4>
+
+        {% for article in news %}
+            <article>
+                <div>
+                    <h3><a href="/news/{{ article[0] }}/show">{{ article[1] }}</a></h3>
+                    {{ article[3]|striptags|slice(0, 250)}}
+                </div>
+            </article>
+        {% endfor %}
+
+    </main>
+{% endblock %}

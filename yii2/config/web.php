@@ -39,14 +39,13 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'news/<id>/show' => 'site/show',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

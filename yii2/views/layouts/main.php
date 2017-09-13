@@ -12,32 +12,53 @@ use app\assets\AppAsset;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<!doctype html>
+<html lang="ru">
 <head>
-    <meta charset="<?= Yii::$app->charset ?>">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+
+    <title>Добро пожаловать</title>
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <!-- Styles -->
     <link href="/css/style.css" rel="stylesheet">
-    <?php $this->head() ?>
+    <link href="/css/select2.css" rel="stylesheet" />
+    <!-- Javascript -->
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="/js/select2.js"></script>
 </head>
 <body>
 <?php $this->beginBody() ?>
-
-<div class="wrap">
+<header>
+    <div class="container">
+        <a href="/" class="logo">Yii</a>
+        <div class="right">
+            <select class="js-example-basic-single">
+                <option></option>
+                <?php foreach ($this->context->news as $article) : ?>
+                    <option value="<?= $article[0] ?>"><?= $article[1] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+</header>
 
         <?= $content ?>
 
-</div>
-
-<footer class="footer">
+<footer>
     <div class="container">
-        <p class="pull-left">&copy; Andrew <?= date('Y') ?></p>
+        <p class="left">&copy; Andrew <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="right">Сегодня
+            <?php
+            echo \app\controllers\Date::widget([
+                    'params' => 'j m Y'
+            ]);
+            ?></p>
     </div>
 </footer>
 

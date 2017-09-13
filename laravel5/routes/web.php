@@ -10,7 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
-    return view('index');
+    return view('templates.news');
 });
+*/
+Route::get('/', ['uses' => 'HomeController@news', 'as' => 'news']);
+Route::get('/news/{id}/show', ['uses' => 'HomeController@show']);
