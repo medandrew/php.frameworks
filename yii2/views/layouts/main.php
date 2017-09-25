@@ -40,12 +40,13 @@ AppAsset::register($this);
             <select class="js-example-basic-single">
                 <option></option>
                 <?php foreach ($this->context->news as $article) : ?>
-                    <option value="<?= $article[0] ?>"><?= $article[1] ?></option>
+                    <option value="<?= $article->id; ?>"><?= $article->title; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
     </div>
 </header>
+
 
         <?= $content ?>
 

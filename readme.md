@@ -58,3 +58,23 @@ Middleware
       - layouts/main - основной шаблон
       - site/news, site/article - представление новостей и отдельной новости
       Класс app\controllers\Date - виджет даты
+      
+Работа с базой. Миграции. Модели
+-----------------
+
+      Laravel 5
+      laravel5/database/frameworks_laravel5.sql - дамп базы данных
+      laravel5/database/migrations - миграции
+      laravel5/app/Models - модели
+      laravel5/app/Http/Controllers/HomeController.php - контроллер
+      
+      Symfony 3
+      symfony3/src/frameworks_symfony3.sql - дамп базы данных
+      symfony3/src/AppBundle/Entity - сущности базы
+      symfony3/src/AppBundle/Controller/DefaultController.php - контроллер 
+      
+      Yii 2
+      yii2/migrations/frameworks_yii2.sql - дамп базы данных
+      yii2/migrations - миграции
+      yii2/models - модели
+      yii2/controllers/SiteController.php - контроллер  

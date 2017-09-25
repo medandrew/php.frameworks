@@ -23,9 +23,9 @@
                 <div class="right">
                     <select class="js-example-basic-single">
                         <option></option>
-                        <?php foreach ($news as $article) : ?>
-                        <option value="{{ $article[0] }}">{{ $article[1] }}</option>
-                        <?php endforeach; ?>
+                        @foreach($news as $article)
+                            <option value="{{ $article->id }}">{{ $article->title }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

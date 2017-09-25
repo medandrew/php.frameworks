@@ -9,26 +9,20 @@ namespace App\Http\Controllers;
  * @package App\Http\Controllers
  */
 
+use App\Models\Article;
+use App\Models\Author;
+
 class HomeController extends Controller
 {
-    protected $news = [];
-
-    public function __construct()
-    {
-        $file = file(__DIR__ . '/../../../database/news.php', FILE_IGNORE_NEW_LINES);
-        foreach ($file as $record) {
-            $this->news[] = explode('|', $record);
-        }
-    }
-
     /*
      * Отображает страницу news
      */
     public function news()
     {
         $data = [
-            'news' => $this->news
+            'news' => Article::all()
         ];
+
         return view('templates.news', $data);
     }
 
@@ -38,9 +32,11 @@ class HomeController extends Controller
     public function show($article)
     {
         $data = [
-            'news'    => $this->news,
-            'article' => $this->news[--$article]
+            'news'    => Article::all(),
+            'article' => Article::find($article),
+            'authors' => Author::all()
         ];
+
         return view('templates.article', $data);
     }
 }

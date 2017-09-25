@@ -5,14 +5,18 @@
         <h4>Новости</h4>
 
         <article>
-            <div>
-                <h3>{{ article[1] }}</h3>
+            <div class="detail">
+                <h3>{{ article.title }}</h3>
                 <div class="author">
-                    {{ article[2] }}
+                    {% for author in authors %}
+                        {% if(null != article.author_id and article.author_id == author.id) %}
+                            {{ author.name }}
+                        {% endif %}
+                    {% endfor %}
                 </div>
-                <img src="/images/{{ article[4] }}" class="left" />
+                <img src="/images/{{ article.image }}" class="left" />
                 {% autoescape %}
-                    {{ article[3]|raw }}
+                    {{ article.text|raw }}
                 {% endautoescape %}
             </div>
         </article>

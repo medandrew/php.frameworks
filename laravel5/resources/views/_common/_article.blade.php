@@ -1,10 +1,14 @@
 <article>
-    <div>
-        <h3>{{ $article[1] }}</h3>
+    <div class="detail">
+        <h3>{{ $article->title }}</h3>
         <div class="author">
-            {{ $article[2] }}
+            @foreach($authors as $author)
+                @if(null !== $article->author_id && $article->author_id === $author->id)
+                    {{ $author->name }}
+                @endif
+            @endforeach
         </div>
-        <img src="/images/{{ $article[4] }}" class="left" />
-        {!! $article[3] !!}
+        <img src="/images/{{ $article->image }}" class="left" />
+        {!! $article->text !!}
     </div>
 </article>

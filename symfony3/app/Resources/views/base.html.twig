@@ -24,7 +24,7 @@
                 <select class="js-example-basic-single">
                     <option></option>
                     {% for article in news %}
-                    <option value="{{ article[0] }}">{{ article[1] }}</option>
+                    <option value="{{ article.id }}">{{ article.title }}</option>
                     {% endfor %}
                 </select>
             </div>

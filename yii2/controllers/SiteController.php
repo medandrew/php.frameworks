@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Article;
+use app\models\Author;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -19,17 +21,9 @@ class SiteController extends Controller
      */
     public function beforeAction($action)
     {
-        $file = file(__DIR__ . '/../models/news.php', FILE_IGNORE_NEW_LINES);
-        foreach ($file as $record) {
-            $this->news[] = explode('|', $record);
-        }
-        //if (isset($_SERVER['X-USERNAME']) && ($_SERVER['X-USERNAME'] === 'admin')) {
-        //    if (isset($_SERVER['X-PASSWORD']) && ($_SERVER['X-PASSWORD'] === hash_hmac('ripemd160', '123456', 'strawberry'))) {
-                return true;
-        //    }
-        //}
-        //header('HTTP/l.1 401 Unauthorized');
-        //die();
+        $this->news = Article::find()->all();
+
+        return true;
     }
 
     /**
@@ -82,7 +76,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('news', [
-            'news' => $this->news
+            'news' => Article::find()->all()
         ]);
     }
 
@@ -93,9 +87,10 @@ class SiteController extends Controller
      */
     public function actionShow($id)
     {
+        $article = Article::find()->where(['id' => $id])->all();
         return $this->render('article', [
-            'news' => $this->news,
-            'article' => $this->news[--$id]
+            'article' => $article[0],
+            'authors' => Author::find()->all()
         ]);
     }
 }

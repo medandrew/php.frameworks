@@ -8,13 +8,19 @@ $this->title = 'Добро пожаловать';
     <h4>Новости</h4>
 
     <article>
-        <div>
-            <h3><?= $article[1] ?></h3>
+        <div class="detail">
+            <h3><?= $article->title; ?></h3>
             <div class="author">
-                <?= $article[2] ?>
+                <?php
+                foreach ($authors as $author) :
+                    if (!empty($article->author_id) && $author->id === $article->author_id) {
+                        echo $author->name;
+                    }
+                endforeach;
+                ?>
             </div>
-            <img src="/images/<?= $article[4] ?>" class="left" />
-            <?= $article[3] ?>
+            <img src="/images/<?= $article->image; ?>" class="left" />
+            <?= $article->text; ?>
         </div>
     </article>
 </main>

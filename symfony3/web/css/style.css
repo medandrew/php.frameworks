@@ -40,6 +40,9 @@ article {
     border-bottom: 5px solid #bfbfbf;
     background-color: #d9d9d9;
 }
+article div.detail {
+    min-height: 270px;
+}
 a {
     text-decoration: none;
     color: #333;
